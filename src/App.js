@@ -45,15 +45,15 @@ function App() {
                 status$.next('start');
                 let startBtn = document.getElementById('startBtn');
                 let stopBtn = document.getElementById('stopBtn');
-                startBtn.style.display = 'none';
-                stopBtn.style.display = 'block';
+                startBtn.style.visibility = 'hidden';
+                stopBtn.style.visibility = 'visible';
             }}>Start</button><br/>
             <button id='stopBtn' onClick={() => {
                 status$.next('stop');
                 let startBtn = document.getElementById('startBtn');
                 let stopBtn = document.getElementById('stopBtn');
-                stopBtn.style.display = 'none';
-                startBtn.style.display = 'block';
+                stopBtn.style.visibility = 'hidden';
+                startBtn.style.visibility = 'visible';
             }}>Stop</button>
             <button onClick={() => reset$.next('Reset')}>Reset</button>
             <button onClick={() => status$.next('wait')}>Wait</button>
