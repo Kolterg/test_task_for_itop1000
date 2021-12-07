@@ -5,8 +5,14 @@ import {useEffect, useState} from "react";
 const seconds$ = new Subject();
 const status$ = new Subject();
 const reset$ = new Subject();
+const wait$ = new Subject();
+
+wait$.subscribe(v => {
+    status$.next(v);
+});
 
 reset$.subscribe(val => {
+    status$.next('start');
     seconds$.next(0);
 });
 
@@ -56,7 +62,7 @@ function App() {
                 startBtn.style.visibility = 'visible';
             }}>Stop</button>
             <button onClick={() => reset$.next('Reset')}>Reset</button>
-            <button onClick={() => status$.next('wait')}>Wait</button>
+            <button onClick={() => wait$.next('wait')}>Wait</button>
         </div>
     );
 }
