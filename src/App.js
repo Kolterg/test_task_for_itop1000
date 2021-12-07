@@ -44,6 +44,23 @@ function App() {
         };
     }, [status]);
 
+    const startBtn = document.getElementById('startBtn');
+    const stopBtn = document.getElementById('stopBtn');
+
+    let click = 0;
+
+    const wait = () => {
+        click += 1;
+        setTimeout(() => {
+            click = 0;
+        }, 300)
+        if (click === 2) {
+            wait$.next('wait');
+            stopBtn.style.visibility = 'hidden';
+            startBtn.style.visibility = 'visible';
+        }
+    }
+
     return (
         <div>
             <span> {new Date(seconds).toISOString().slice(11, 19)}</span><br/>
@@ -61,8 +78,14 @@ function App() {
                 stopBtn.style.visibility = 'hidden';
                 startBtn.style.visibility = 'visible';
             }}>Stop</button>
-            <button onClick={() => reset$.next('Reset')}>Reset</button>
-            <button onClick={() => wait$.next('wait')}>Wait</button>
+            <button onClick={() => {
+                reset$.next('Reset');
+                let startBtn = document.getElementById('startBtn');
+                let stopBtn = document.getElementById('stopBtn');
+                startBtn.style.visibility = 'hidden';
+                stopBtn.style.visibility = 'visible';
+            }}>Reset</button>
+            <button onClick={() => wait()}>Wait</button>
         </div>
     );
 }
