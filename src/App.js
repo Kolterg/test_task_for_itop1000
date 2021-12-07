@@ -5,11 +5,6 @@ import {useEffect, useState} from "react";
 const seconds$ = new Subject();
 const status$ = new Subject();
 const reset$ = new Subject();
-const wait$ = new Subject();
-
-wait$.subscribe(v => {
-    status$.next(v);
-});
 
 reset$.subscribe(val => {
     status$.next('start');
@@ -55,7 +50,7 @@ function App() {
             click = 0;
         }, 300)
         if (click === 2) {
-            wait$.next('wait');
+            status$.next('wait');
             stopBtn.style.visibility = 'hidden';
             startBtn.style.visibility = 'visible';
         }
